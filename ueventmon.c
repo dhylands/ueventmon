@@ -100,11 +100,19 @@ int main(void)
 	printf("Socket opened\n");
 
 	static char buf[UEVENT_BUFFER_SIZE];
+	char *s;
+
 	while(1) {
 		int count = uevent_next_event(fd, buf, sizeof(buf));
 		if (!count)
 			return -1;
-		printf("%s\n", buf);
+		s = buf;
+		printf( "%s\n", s);
+		s += strlen(s) + 1;
+		while (s < &buf[count]) {
+			printf("  %s\n", s);
+			s += strlen(s) + 1;
+		}
 	}
 
 	return 0;
