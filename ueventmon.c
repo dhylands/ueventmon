@@ -29,6 +29,9 @@
 
 #define UEVENT_BUFFER_SIZE 2048
 
+#undef LOGE
+#define	LOGE(fmt, args...)	printf(fmt "\n", ## args)
+
 /* Returns -1 on failure, and socket fd on success */
 static int open_uevent()
 {
